@@ -67,12 +67,12 @@ const createRestaurantHTML = (restaurant) => {
 const article = document.createElement('article');
 article.className = 'item';
 
-const image = document.createElement('img');
-image.className = 'restaurant-img';
-image.src = DBHelper.imageUrlForRestaurant(restaurant);
-article.append(image);
+const img = document.createElement('div');
+img.className = 'img';
+img.style.backgroundImage = `url(${DBHelper.imageUrlForRestaurant(restaurant)})`;
+article.append(img);
 
-const name = document.createElement('h1');
+const name = document.createElement('h3');
 name.innerHTML = restaurant.name;
 article.append(name);
 
@@ -89,7 +89,7 @@ more.innerHTML = 'View Details';
 more.href = DBHelper.urlForRestaurant(restaurant);
 article.append(more)
 
-return article
+return article;
 }
 
 /**
@@ -138,14 +138,8 @@ addMarkersToMap();
 * Update page and map for current restaurants.
 */
 const updateRestaurants = () => {
-const cSelect = document.querySelector('[data-cuisines-select]');
-const nSelect = document.querySelector('[data-neighborhoods-select]');
-
-const cIndex = cSelect.selectedIndex;
-const nIndex = nSelect.selectedIndex;
-
-const cuisine = cSelect[cIndex].value;
-const neighborhood = nSelect[nIndex].value;
+const { value: cuisine } = document.querySelector('[data-cuisines-select]');
+const { value: neighborhood } = document.querySelector('[data-neighborhoods-select]');
 
 DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
   if (error) {
