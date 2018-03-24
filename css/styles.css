@@ -1,5 +1,9 @@
 @charset "utf-8";
-/* CSS Document */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
@@ -50,11 +54,14 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 }
 /* ====================== Navigation ====================== */
 nav {
-  width: 100%;
   height: 80px;
   background-color: #252831;
-  text-align:center;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
+
 nav h1 {
   margin: auto;
 }
@@ -100,39 +107,50 @@ nav h1 a {
 /* ====================== Map ====================== */
 #map {
   height: 400px;
-  width: 100%;
   background-color: #ccc;
 }
-
-@media (min-width:700px)  { 
-  #maincontent-top > #map-container, #maincontent-top > #map-container > #map {
-    height: 660px;
-  }
- }
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
-  width: 100%;
-  height: 50px;
-  background-color: #3397DB;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #3397DB;
+  padding: 10px 0;
 }
+
+@media (min-width: 768px) {
+  .filter-options {
+    height: 50px;
+    flex-direction: row;
+  }
+}
+
+
 .filter-options h2 {
   color: white;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1;
-  margin: 0 20px;
+  margin: 10px 20px;
 }
+
 .filter-options select {
-  background-color: white;
+  background-color: #fff;
   border: 1px solid #fff;
-  font-family: Arial,sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 11pt;
   height: 35px;
-  letter-spacing: 0;
-  margin: 10px;
   padding: 0 10px;
   width: 200px;
+  margin: 10px 5px 0;
+}
+
+.filter-query {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 /* ====================== Restaurant Listing ====================== */
@@ -206,7 +224,6 @@ nav h1 a {
 .inside #map {
   background-color: #ccc;
   height: 100%;
-  width: 100%;
 }
 .inside #footer {
   bottom: 0;
