@@ -56,9 +56,8 @@ section {
   display: block;
 }
 
-#maincontent {
+#content {
   background-color: #f3f3f3;
-  min-height: 100%;
 }
 
 #bottom {
@@ -79,7 +78,7 @@ section {
   justify-content: center;
 }
 
-#top a {
+#logo {
   color: #fff;
   font-size: 24px;
   letter-spacing: 10px;
@@ -87,7 +86,7 @@ section {
   font-weight: 200;
 }
 
-#breadcrumb {
+#breadcrumbs {
     padding: 10px 40px 16px;
     list-style: none;
     background-color: #eee;
@@ -96,18 +95,18 @@ section {
     width: calc(50% - 80px);
 }
 
-#breadcrumb .separator {
+#breadcrumbs .separator {
     padding: 8px;
     color: black;
     content: "/\00a0";
 }
 
-#breadcrumb a {
+#breadcrumbs a {
     color: #0275d8;
     text-decoration: none;
 }
 
-#breadcrumb a:hover {
+#breadcrumbs a:hover {
     color: #01447e;
     text-decoration: underline;
 }
@@ -117,7 +116,7 @@ section {
   background-color: #ccc;
 }
 
-.filter-options {
+#filters {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,21 +126,21 @@ section {
 }
 
 @media (min-width: 768px) {
-  .filter-options {
+  #filters {
     height: 50px;
     flex-direction: row;
   }
 }
 
-.filter-options h2 {
-  color: white;
+#filters h2 {
+  color: #fff;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1;
   margin: 10px 20px;
 }
 
-.filter-options select {
+#filters select {
   background-color: #fff;
   border: 1px solid #fff;
   height: 35px;
@@ -150,23 +149,24 @@ section {
   margin: 10px 5px 0;
 }
 
-.filter-query {
+#filters-options {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
-#restaurants-list {
+#results {
   background-color: #f3f3f3;
   list-style: none;
   margin: 0;
   padding: 30px 15px 60px;
   text-align: center;
   display: flex;
+  flex-wrap: wrap;
 }
 
-#restaurants-list li {
+#results .item {
   background-color: #fff;
   border: 2px solid #ccc;
   margin: 15px;
@@ -176,7 +176,7 @@ section {
   width: 270px;
 }
 
-#restaurants-list .restaurant-img {
+#results .restaurant-img {
   background-color: #ccc;
   display: block;
   margin: 0;
@@ -185,7 +185,7 @@ section {
   min-width: 100%;
 }
 
-#restaurants-list li h1 {
+#results h3 {
   color: #f18200;
   font-size: 14pt;
   font-weight: 200;
@@ -195,12 +195,12 @@ section {
   text-transform: uppercase;
 }
 
-#restaurants-list p {
+#results p {
   margin: 0;
   font-size: 11pt;
 }
 
-#restaurants-list li a {
+#results a {
   background-color: orange;
   border-bottom: 3px solid #eee;
   color: #fff;
