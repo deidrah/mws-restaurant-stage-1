@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css">
+    <link rel="stylesheet" href="//normalize-css.googlecode.com/svn/trunk/normalize.css">
     <link rel="stylesheet" href="css/styles.css">
     <title>Restaurant Info</title>
   </head>
   <body class="single">
     <header id="top">
-      <a href="/" id="logo">Restaurant Reviews</a>
+      <a href="./" id="logo">Restaurant Reviews</a>
     </header>
     <main id="content">
       <section id="about">
         <div id="restaurant">
-          <nav id="breadcrumbs">
-            <a href="/">Home</a>
+          <nav id="breadcrumbs" role="navigation">
+            <a href="./">Home</a>
           </nav>
           <h3 id="restaurant-name"></h3>
           <img id="restaurant-img" alt="Restaurant image">
@@ -24,7 +24,7 @@
           <table id="restaurant-hours"></table>
         </div>
         <aside id="map-container">
-          <div id="map"></div>
+          <div id="map" role="application" aria-label="Google Maps" tabindex="-1"></div>
         </aside>
        </section>
       <section id="reviews"></section>
@@ -36,5 +36,13 @@
     <script src="js/dbhelper.js"></script>
     <script src="js/restaurant_info.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Q17EOdyQSWrQbXPt0m7Qz4QdlZH2JIA&amp;libraries=places&amp;callback=initMap"></script>
+
+    <script>
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js');
+        });
+      }
+     </script>
   </body>
 </html>

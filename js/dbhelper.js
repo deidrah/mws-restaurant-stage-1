@@ -115,11 +115,9 @@ class DBHelper {
           callback(error, null);
         } else {
           // Get all neighborhoods from all restaurants and remove duplicates from neighborhoods
-          const neighborhoods = restaurants
-            .map((v, i) => restaurants[i].neighborhood)
-            .filter((v, i) => neighborhoods.indexOf(v) == i);
+          const neighborhoods = restaurants.map(({ neighborhood }) => neighborhood);
   
-          callback(null, neighborhoods);
+          callback(null, [...new Set(neighborhoods)]);
         }
       });
     }
@@ -134,11 +132,9 @@ class DBHelper {
           callback(error, null);
         } else {
           // Get all cuisines from all restaurants and remove duplicates from cuisines
-          const cuisines = restaurants
-            .map((v, i) => restaurants[i].cuisine_type)
-            .filter((v, i) => cuisines.indexOf(v) == i);
+          const cuisines = restaurants.map(({ cuisine_type }) => cuisine_type);
   
-          callback(null, cuisines);
+          callback(null, [...new Set(cuisines)]);
         }
       });
     }
