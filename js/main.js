@@ -72,7 +72,7 @@ const createRestaurantHTML = (restaurant) => {
   img.style.backgroundImage = `url(${DBHelper.imageUrlForRestaurant(restaurant)})`;
   article.append(img);
 
-  const name = document.createElement('h3');
+  const name = document.createElement('h5');
   name.innerHTML = restaurant.name;
   article.append(name);
 

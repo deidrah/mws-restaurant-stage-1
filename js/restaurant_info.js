@@ -107,7 +107,7 @@ const createReviewHTML = (review) => {
  */
 const fillReviewsHTML = (reviews = restaurant.reviews) => {
   const container = document.getElementById('reviews');
-  const title = document.createElement('h2');
+  const title = document.createElement('h4');
 
   title.innerHTML = 'Reviews';
 
@@ -136,8 +136,9 @@ const fillRestaurantHTML = (value = restaurant) => {
   address.innerHTML = value.address;
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
+  image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(value);
+  image.alt = name;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = value.cuisine_type;

@@ -138,7 +138,7 @@ section {
   }
 }
 
-#filters h2 {
+#filters h4 {
   color: #fff;
   font-size: 1rem;
   font-weight: normal;
@@ -220,7 +220,7 @@ section {
   min-width: 100%;
 }
 
-#results h3 {
+#results h5 {
   color: #f18200;
   font-size: 18px;
   font-weight: 200;
@@ -301,14 +301,6 @@ section {
   }
 }
 
-@media (min-width: 992px) {
-
-}
-
-@media (min-width: 1200px) {
-
-}
-
 #restaurant-name {
   color: #f18200;
   font-size: 24px;
@@ -352,7 +344,7 @@ section {
   padding: 20px;
 }
 
-#reviews h2 {
+#reviews h4 {
   color: #f58500;
   font-size: 28px;
   font-weight: 300;
