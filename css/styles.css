@@ -86,6 +86,10 @@ section {
   justify-content: center;
 }
 
+#top h1 {
+  margin: 0;
+}
+
 #logo {
   color: #fff;
   font-size: 24px;
