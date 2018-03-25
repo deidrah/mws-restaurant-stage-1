@@ -7,29 +7,28 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>Restaurant Info</title>
   </head>
-  <body class="inside">
+  <body class="single">
     <header id="top">
       <a href="/" id="logo">Restaurant Reviews</a>
     </header>
-    <nav id="breadcrumbs">
-      <a href="/">Home</a>
-    </nav>
     <main id="content">
-      <section id="map-container">
-        <div id="map"></div>
-      </section>
-      <section id="restaurant-container">
-        <h1 id="restaurant-name"></h1>
-        <img id="restaurant-img">
-        <p id="restaurant-cuisine"></p>
-        <p id="restaurant-address"></p>
-        <table id="restaurant-hours"></table>
-      </section>
-      <section id="reviews-container">
-        <ul id="reviews-list"></ul>
-      </section>
+      <section id="about">
+        <div id="restaurant">
+          <nav id="breadcrumbs">
+            <a href="/">Home</a>
+          </nav>
+          <h3 id="restaurant-name"></h3>
+          <img id="restaurant-img" alt="Restaurant image">
+          <p id="restaurant-cuisine"></p>
+          <p id="restaurant-address"></p>
+          <table id="restaurant-hours"></table>
+        </div>
+        <aside id="map-container">
+          <div id="map"></div>
+        </aside>
+       </section>
+      <section id="reviews"></section>
     </main>
-
     <footer id="bottom">
       Copyright &copy; 2018 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
     </footer>
