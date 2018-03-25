@@ -77,7 +77,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  /.*(?:googleapis|gstatic)\.com.*$/,
+  /.*(?:googleapis|gstatic|unpkg)\.com.*$/,
   workbox.strategies.staleWhileRevalidate(),
 );
 
