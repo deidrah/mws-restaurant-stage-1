@@ -70,6 +70,9 @@ const createRestaurantHTML = (restaurant) => {
   const img = document.createElement('div');
   img.className = 'img';
   img.style.backgroundImage = `url(${DBHelper.imageUrlForRestaurant(restaurant)})`;
+  img.setAttribute('tabindex', '-1');
+  img.setAttribute('role', 'img');
+  img.setAttribute('aria-label', `Photo of '${restaurant.name}' restaurant`);
   article.append(img);
 
   const name = document.createElement('h5');
