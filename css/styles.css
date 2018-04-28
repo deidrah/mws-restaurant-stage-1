@@ -62,7 +62,7 @@ section {
 
 #bottom {
   background-color: #444;
-  color: #aaa;
+  color: #eee;
   letter-spacing: 1px;
   height: 60px;
   display: flex;
@@ -131,7 +131,7 @@ section {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #3397DB;
+  background-color: #006eb9;
   padding: 10px 0;
 }
 
@@ -228,7 +228,7 @@ section {
 }
 
 #results h5 {
-  color: #f18200;
+  color: #c15200;
   font-size: 18px;
   font-weight: 200;
   letter-spacing: 0;
@@ -241,7 +241,7 @@ section {
 }
 
 #results a {
-  background-color: orange;
+  background-color: #c15200;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;
