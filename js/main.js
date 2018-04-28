@@ -167,8 +167,10 @@ window.initMap = () => {
     scrollwheel: false
   });
 
-  google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-    document.querySelector('#map iframe').setAttribute('title', 'Google Map');
+  google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
+    document
+      .querySelector('#map iframe')
+      .setAttribute('title', 'Google Map');
   });
 
   updateRestaurants();
