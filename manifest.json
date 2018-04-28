@@ -1,0 +1,16 @@
+{
+  "short_name": "Restaurant reviews",
+  "name": "Restaurant reviews - Check out what people say about other restaurants",
+  "background_color": "#c15200",
+  "theme_color": "#c15200",
+  "display": "standalone",
+  "icons": [{
+    "src": "img/favicon-1024.png",
+    "sizes": "1024x1024",
+    "type": "image/png"
+  }, {
+    "src": "img/favicon-256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }]
+}
