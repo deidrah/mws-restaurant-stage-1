@@ -303,7 +303,8 @@ section {
   }
 
   #restaurant,
-  #reviews {
+  #reviews,
+  #add-review {
     width: 50%;
   }
 }
@@ -347,11 +348,13 @@ section {
   padding: 20px;
 }
 
-#reviews {
+#reviews,
+#add-review {
   padding: 20px;
 }
 
-#reviews h4 {
+#reviews h4,
+#add-review h4 {
   color: #f58500;
   font-size: 28px;
   font-weight: 300;
@@ -381,4 +384,82 @@ section {
 
 #reviews p + p {
   margin-top: 10px;
+}
+
+#offline-info {
+  background-color: #eab802;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 14px;
+  font-weight: bold;
+  display: none;
+  z-index: 1000;
+}
+
+#review-queued {
+  padding: 10px 12px;
+  font-weight: bold;
+  background-color: #eab802;
+  margin-bottom: 15px;
+  display: none;
+}
+
+#offline-info.active,
+#review-queued.active {
+  display: block;
+}
+
+#add-review.disabled input[type="text"],
+#add-review.disabled .field label:not(:first-child),
+#add-review.disabled textarea ,
+#add-review.disabled button {
+  pointer-events: none;
+  opacity: .5;
+}
+
+#add-review .field {
+  margin-bottom: 15px;
+}
+
+#add-review .field label:first-child {
+  font-weight: bold;
+  display: block;
+}
+
+#add-review input,
+#add-review textarea {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+}
+
+#add-review input[type="radio"] {
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+#add-review .field label:not(:first-child) {
+  background-color: #fff;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+#add-review input[type="text"] {
+  width: 50%;
+}
+
+#add-review button {
+  background-color: #c15200;
+  border: 3px solid #eee;
+  color: #fff;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+#add-review textarea {
+  width: 100%;
+  min-height: 200px;
 }

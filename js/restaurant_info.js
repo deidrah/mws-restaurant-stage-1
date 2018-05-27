@@ -1,6 +1,9 @@
 let restaurant;
 let map;
 
+const reviewQueued = document.querySelector('#review-queued');
+const form = document.querySelector('#add-review');
+
 /**
  * Get a parameter by name from page URL.
  */
@@ -25,6 +28,10 @@ const getParameterByName = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+const setInputValue = (name, value) => {
+  document.getElementsByName(name).value = value;
+};
+
 /**
  * Get current restaurant from page URL.
  */
@@ -48,7 +55,20 @@ const fetchRestaurantFromURL = (callback) => {
       }
 
       fillRestaurantHTML();
-      callback(null, restaurant)
+      callback(null, restaurant);
+
+      DBHelper.fetchQueuedReview(id, (error, value) => {
+        if (value) {
+          reviewQueued.classList.add('active');
+          form.classList.add('disabled');
+        }
+      })
+    });
+
+    DBHelper.fetchRestaurantReviews(id, (error, value) => {
+      if (!error) {
+        fillReviewsHTML(value);
+      }
     });
   }
 }
@@ -89,7 +109,7 @@ const createReviewHTML = (review) => {
   rating.className = 'rating';
   info.className = 'info';
   author.innerHTML = review.name;
-  date.innerHTML = ` (${review.date}) `;
+  date.innerHTML = ` (${new Date(review.createdAt).toLocaleDateString()}) `;
   rating.innerHTML = `${review.rating} ★`;
   comments.innerHTML = review.comments;
 
@@ -105,7 +125,7 @@ const createReviewHTML = (review) => {
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-const fillReviewsHTML = (reviews = restaurant.reviews) => {
+const fillReviewsHTML = (reviews) => {
   const container = document.getElementById('reviews');
   const title = document.createElement('h4');
 
@@ -129,6 +149,9 @@ const fillReviewsHTML = (reviews = restaurant.reviews) => {
  * Create restaurant HTML and add it to the webpage
  */
 const fillRestaurantHTML = (value = restaurant) => {
+  const id = document.querySelector('#restaurantId');
+  id.value = value.id;
+
   const name = document.getElementById('restaurant-name');
   name.innerHTML = value.name;
 
@@ -147,9 +170,6 @@ const fillRestaurantHTML = (value = restaurant) => {
   if (value.operating_hours) {
     fillRestaurantHoursHTML();
   }
-
-  // fill reviews
-  fillReviewsHTML();
 }
 
 /**
@@ -188,3 +208,45 @@ window.initMap = () => {
     }
   });
 }
+
+/**
+ * Queue the review if the user is offline.
+ */
+const offlineInfo = document.querySelector('#offline-info');
+
+const submitReview = (error, value) => {
+  if (error) {
+    reviewQueued.classList.add('active');
+    form.classList.add('disabled');
+  } else {
+    document
+      .querySelector('#reviews')
+      .appendChild(createReviewHTML(value));
+
+    reviewQueued.classList.remove('active');
+    form.classList.remove('disabled');
+  }
+
+  form.reset();
+};
+
+window.addEventListener('offline', () => offlineInfo.classList.add('active'), false);
+
+window.addEventListener('online', () => {
+  offlineInfo.classList.remove('active')
+
+  DBHelper.submitQueuedReview(restaurant.id, submitReview);
+}, false);
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const data = new FormData(form);
+  const params = {};
+
+  for (let [key, value] of data.entries()) {
+    params[key] = value;
+  }
+
+  DBHelper.submitReview(params, submitReview);
+});

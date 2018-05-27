@@ -7,8 +7,84 @@ class DBHelper {
      * Database URL.
      * Change this to restaurants.json file location on your server.
      */
-    static DATABASE_URL(id = '') {
+    static RESTAURANTS_URL(id = '') {
       return `/restaurants/${id}`;
+    }
+
+    static REVIEWS_URL(id = '') {
+      return `/reviews/${id ? `?restaurant_id=${id}` : ''}`;
+    }
+
+    static fetchQueuedReview(id, callback) {
+      localforage
+        .getItem(`review-${id}`)
+        .then((value) => {
+          if (value === null) {
+            return callback(true);
+          }
+
+          callback(null, value);
+        });
+    }
+
+    static submitQueuedReview(id, callback) {
+      DBHelper.fetchQueuedReview(id, (error, value) => {
+        if (error) {
+          return callback(null, value);
+        }
+
+        DBHelper.submitReview(value, (err, val) => {
+          localforage
+            .removeItem(`review-${id}`)
+            .then(() => callback(null, val))
+            .catch(() => callback(true));
+        });
+      });
+    }
+
+    static submitReview(params, callback) {
+      localforage
+        .setItem(`review-${params.restaurant_id}`, params)
+        .then(() => {
+          fetch(DBHelper.REVIEWS_URL(), {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(params),
+          })
+          .then(res => res.json())
+          .then((json) => {
+            localforage.removeItem(DBHelper.REVIEWS_URL(params.restaurant_id));
+
+            localforage
+              .removeItem(`review-${params.restaurant_id}`)
+              .then(() => callback(null, json));
+          })
+          .catch(() => callback(true));
+        });
+    }
+
+    static fetchRestaurantReviews(id, callback) {
+      const url = DBHelper.REVIEWS_URL(id);
+
+      localforage
+        .getItem(url)
+        .then((value) => {
+          if (value === null) {
+            return fetch(url)
+              .then(res => res.json())
+              .then((json) => {
+                localforage.setItem(url, json);
+
+                return json;
+              });
+          }
+
+          return value;
+        })
+        .then(value => callback(null, value))
+        .catch(() => callback('Something went wrong', null));
     }
 
     static fetchOrGetCache(url, callback) {
@@ -17,9 +93,8 @@ class DBHelper {
         .then((value) => {
           if (value === null) {
             return fetch(url)
-              .then((res) => {
-                const json = res.json();
-
+              .then(res => res.json())
+              .then((json) => {
                 localforage.setItem(url, json);
 
                 return json;
@@ -36,14 +111,14 @@ class DBHelper {
      * Fetch all restaurants.
      */
     static fetchRestaurants(callback) {
-      DBHelper.fetchOrGetCache(DBHelper.DATABASE_URL(), callback);
+      DBHelper.fetchOrGetCache(DBHelper.RESTAURANTS_URL(), callback);
     }
 
     /**
      * Fetch a restaurant by its ID.
      */
     static fetchRestaurantById(id, callback) {
-      DBHelper.fetchOrGetCache(DBHelper.DATABASE_URL(id), callback);
+      DBHelper.fetchOrGetCache(DBHelper.RESTAURANTS_URL(id), callback);
     }
 
     /**
@@ -138,14 +213,14 @@ class DBHelper {
      * Restaurant page URL.
      */
     static urlForRestaurant(restaurant) {
-      return (`./restaurant.html?id=${restaurant.id}`);
+      return `./restaurant.html?id=${restaurant.id}`;
     }
 
     /**
      * Restaurant image URL.
      */
     static imageUrlForRestaurant(restaurant) {
-      return (`./img/${restaurant.photograph}.webp`);
+      return `./img/${restaurant.photograph}.webp?id=${restaurant.id}`;
     }
 
     /**
