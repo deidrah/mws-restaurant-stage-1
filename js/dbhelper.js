@@ -8,11 +8,11 @@ class DBHelper {
      * Change this to restaurants.json file location on your server.
      */
     static RESTAURANTS_URL(id = '') {
-      return `/restaurants/${id}`;
+      return `http://localhost:8080/restaurants/${id}`;
     }
 
     static REVIEWS_URL(id = '') {
-      return `/reviews/${id ? `?restaurant_id=${id}` : ''}`;
+      return `http://localhost:8080/reviews/${id ? `?restaurant_id=${id}` : ''}`;
     }
 
     static fetchQueuedReview(id, callback) {
