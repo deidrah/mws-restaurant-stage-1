@@ -9,9 +9,9 @@
     <title>Restaurant Reviews</title>
   </head>
   <body>
-    <header id="top" role="banner">
+    <nav id="top">
       <h1><a href="./" id="logo">Restaurant Reviews</a></h1>
-    </header>
+    </nav>
     <main id="content" role="main">
       <section id="map-container">
         <div id="map" role="application" aria-label="Google Maps" tabindex="-1"></div>
@@ -40,13 +40,14 @@
     <script src="js/dbhelper.min.js"></script>
     <script src="js/main.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Q17EOdyQSWrQbXPt0m7Qz4QdlZH2JIA&amp;libraries=places&amp;callback=initMap"></script>
-
     <script>
-      if('serviceWorker' in navigator) {
+      if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js');
+          navigator
+            .serviceWorker
+            .register('sw.js')
         });
       }
-     </script>
+    </script>
   </body>
 </html>

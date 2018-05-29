@@ -72,6 +72,7 @@ const createRestaurantHTML = (restaurant) => {
   img.style.backgroundImage = `url(${DBHelper.imageUrlForRestaurant(restaurant)})`;
   img.setAttribute('tabindex', '-1');
   img.setAttribute('role', 'img');
+  img.setAttribute('alt', `Photo of '${restaurant.name}' restaurant`);
   img.setAttribute('aria-label', `Photo of '${restaurant.name}' restaurant`);
   article.append(img);
 
